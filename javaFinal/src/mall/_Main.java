@@ -1,9 +1,12 @@
 package mall;
 
+import controller.MallController;
+
 public class _Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		MallController con = MallController.getInstance();
+		con.init();
 
 	}
 

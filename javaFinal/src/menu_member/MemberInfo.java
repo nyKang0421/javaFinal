@@ -1,18 +1,20 @@
-package menu_mall;
+package menu_member;
 
 import controller.MallController;
+import dao.MemberDAO;
 import mall.MenuCommand;
 import util.Util;
 
-public class _MallMain implements MenuCommand {
+public class MemberInfo implements MenuCommand {
 	private MallController cont;
 	Util util = Util.getInterface();
+	MemberDAO mdao = MemberDAO.getInstance();
 
 	@Override
 	public void init() {
 		cont = MallController.getInstance();
-		System.out.println("=====[ 쇼핑몰 ]=====");
-		System.out.println("[1] 회원가입\n[2] 로그인\n[0] 종료");
+		System.out.println("=====[ 내정보 ]=====");
+		System.out.println("[1] 비밀번호변경\n[2] 뒤로가기\n[0] 종료");
 		System.out.println("=====================");
 		
 	}
@@ -24,16 +26,14 @@ public class _MallMain implements MenuCommand {
 			System.out.println("[ 프로그램 종료 ]");
 			cont.setNext(null);
 		}else if (sel == 1) {
-			cont.setNext("MallJoin");
+			mdao.ModifyPw(cont.getLoginId());
+			cont.setNext("MemberInfo");
 
 		}else if (sel == 2) {
-			cont.setNext("MallLogin");
-			
-		}else {
-			cont.setNext("MallMain");
-			
+			util.printMsg("메뉴로 돌아갑니다");
+			cont.setNext("MemberMain");
 		}
-
+		
 		return false;
 	}
 
